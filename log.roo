@@ -1,0 +1,26 @@
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-04-26 21:00:36
+project --topLevelPackage net.sepman.dice --projectName DiceThrower --java 7 --packaging WAR
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-04-26 21:00:37
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-04-26 21:01:17
+jpa setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE 
+entity jpa --class ~.domain.DiceThrow --activeRecord false
+repository jpa --interface ~.repository.ThrowRepository --entity ~.domain.DiceThrow
+service --interface ~.service.ThrowService --entity ~.domain.DiceThrow
+entity jpa --class ~.domain.Die --activeRecord false
+repository jpa --interface ~.repository.DiceRepository --entity ~.domain.Die
+service --interface ~.service.DiceService --entity ~.domain.Die
+field number --fieldName Sides --type int --notNull true
+field number --fieldName ThrowResult --type int 
+// [failed] focus --class ~.domain.Throw
+focus --class ~.domain.DiceThrow
+field date --fieldName throwTime --type java.util.Date --notNull --dateTimeFormatPattern "dd-MM-yy hh:mm:ss"
+field string --fieldName code --notNull 
+field string --fieldName owner --notNull 
+field string --fieldName comment
+web mvc setup
+web mvc scaffold --class ~.web.ThrowController --backingType ~.domain.DiceThrow
+logging setup --level DEBUG 
+field set --fieldName diceThrows --type ~.domain.Die --cardinality ONE_TO_MANY
+web mvc scaffold --class ~.web.DiceController --backingType ~.domain.Die
+focus --class ~.domain.DiceThrow
+field string --fieldName command --notNull 

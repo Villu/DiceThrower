@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show delete="false" id="ps_net_sepman_dice_domain_DiceThrow" object="${dicethrow}" path="/dicethrows" update="false" z="CTNJiwpvXGoCruLTQz8PZrgxsqA=">
+        <field:display date="true" dateTimePattern="${diceThrow_throwtime_date_format}" field="throwTime" id="s_net_sepman_dice_domain_DiceThrow_throwTime" object="${dicethrow}" z="NFS2pRMnacviy3gZjteNeCxj8Co="/>
+        <field:display field="code" id="s_net_sepman_dice_domain_DiceThrow_code" object="${dicethrow}" z="nFMwjEi0MVQOUAv88i+d/XVtioY="/>
+        <field:display field="owner" id="s_net_sepman_dice_domain_DiceThrow_owner" object="${dicethrow}" z="eEZBnlHEPT6KtYUowh193AzMTrs="/>
+        <field:display field="comment" id="s_net_sepman_dice_domain_DiceThrow_comment" object="${dicethrow}" z="qqr9sPPMT380L/VtMN5r536uOWQ="/>
+        <field:display field="diceThrows" id="s_net_sepman_dice_domain_DiceThrow_diceThrows" object="${dicethrow}"/>
+        <field:display field="command" id="s_net_sepman_dice_domain_DiceThrow_command" object="${dicethrow}" z="tTfCPIA8sVTSGvBOoC9REdW23UU="/>
+    </page:show>
+</div>
