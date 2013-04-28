@@ -6,6 +6,7 @@
         <table:table data="${dies}" id="l_net_sepman_dice_domain_Die" path="/dies" z="v4cuMLfr09D0WPquXtmY9McD0F4=">
             <table:column id="c_net_sepman_dice_domain_Die_sides" property="sides" z="aHyBtCUdUuhsARNCDp41RzjKWwI="/>
             <table:column id="c_net_sepman_dice_domain_Die_throwResult" property="throwResult" z="5mTMCpFTnb0xBAkJtcZ5K741Vqs="/>
+            <table:column id="c_net_sepman_dice_domain_Die_exploded" property="exploded" z="VJL2DffyBpt1ja/1i4s9Vzfx9Lo="/>
         </table:table>
     </page:list>
 </div>

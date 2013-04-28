@@ -5,17 +5,14 @@ package net.sepman.dice.web;
 
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import net.sepman.dice.domain.DiceThrow;
 import net.sepman.dice.service.DiceService;
 import net.sepman.dice.service.ThrowService;
 import net.sepman.dice.web.ThrowController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
@@ -27,17 +24,6 @@ privileged aspect ThrowController_Roo_Controller {
     
     @Autowired
     DiceService ThrowController.diceService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String ThrowController.create(@Valid DiceThrow diceThrow, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, diceThrow);
-            return "dicethrows/create";
-        }
-        uiModel.asMap().clear();
-        throwService.saveDiceThrow(diceThrow);
-        return "redirect:/dicethrows/" + encodeUrlPathSegment(diceThrow.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ThrowController.createForm(Model uiModel) {

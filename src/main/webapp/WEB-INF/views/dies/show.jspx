@@ -5,5 +5,6 @@
     <page:show id="ps_net_sepman_dice_domain_Die" object="${die}" path="/dies" z="Pjz4sXL7cPhx2DappXX5Be6PIRY=">
         <field:display field="sides" id="s_net_sepman_dice_domain_Die_sides" object="${die}" z="8Zq/G0DiX+0U3jFk3sY7ld4//e4="/>
         <field:display field="throwResult" id="s_net_sepman_dice_domain_Die_throwResult" object="${die}" z="rpzazDuEVYct9o/MccHUi8Fu8Dw="/>
+        <field:display field="exploded" id="s_net_sepman_dice_domain_Die_exploded" object="${die}" z="oeuzx6bRxgXjVGOjqhz2IJ/e32Q="/>
     </page:show>
 </div>

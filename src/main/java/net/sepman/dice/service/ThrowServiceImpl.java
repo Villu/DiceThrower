@@ -3,6 +3,7 @@ package net.sepman.dice.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import net.sepman.dice.domain.DiceThrow;
@@ -16,6 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ThrowServiceImpl implements ThrowService {
 	static Logger log = LoggerFactory.getLogger(ThrowServiceImpl.class.getName());
+	
+	public List<DiceThrow> findByCode(String code){
+		return throwRepository.findByCode(code);
+	}
+	
+    public List<DiceThrow> findDiceThrowEntriesByCode(int firstResult, int maxResults, String code) {
+        return throwRepository.findByCode(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults), code);
+    }
+    
+    public long countAllDiceThrowsByCode(String code) {
+        return throwRepository.countByCode(code);
+    }
 	
     public void saveDiceThrow(DiceThrow diceThrow) {
     	
@@ -34,6 +47,8 @@ public class ThrowServiceImpl implements ThrowService {
     	int amount=1;
     	int sides=6;
     	int explodes=0;
+    	
+    	Random random = new Random();
     	
     	try {
     		//first is the amount of dice
@@ -77,12 +92,14 @@ public class ThrowServiceImpl implements ThrowService {
     	
     	log.debug("Throwing:" + amount);
     	for (int i = 0; i < amount; i++) {
-    		Die die = (new Die(sides)).throwDie();
+    		Die die = (new Die(sides)).throwDie(random);
     		dice.add(die);
     		log.debug("Threw:" + die.getThrowResult());
     		if(explodes>0){
+    			int exploded = 0;
     			while(die.getThrowResult()>=explodes){
-    				die = (new Die(sides)).throwDie();
+    				die = (new Die(sides)).throwDie(random);
+    				die.setExploded(++exploded);
     				log.debug("Exploded! New throw:"+die.getThrowResult());
     				dice.add(die);
     			}

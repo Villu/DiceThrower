@@ -24,3 +24,8 @@ field set --fieldName diceThrows --type ~.domain.Die --cardinality ONE_TO_MANY
 web mvc scaffold --class ~.web.DiceController --backingType ~.domain.Die
 focus --class ~.domain.DiceThrow
 field string --fieldName command --notNull 
+hint finder
+hint finder 
+// [failed] finder list
+hint finder add
+// [failed] finder list --class ~.domain.Die

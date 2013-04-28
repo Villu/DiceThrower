@@ -23,4 +23,12 @@ privileged aspect Die_Roo_JavaBean {
         this.throwResult = throwResult;
     }
     
+    public int Die.getExploded() {
+        return this.exploded;
+    }
+    
+    public void Die.setExploded(int exploded) {
+        this.exploded = exploded;
+    }
+    
 }

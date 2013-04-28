@@ -5,6 +5,7 @@
     <form:create id="fc_net_sepman_dice_domain_Die" modelAttribute="die" path="/dies" render="${empty dependencies}" z="QNBn/VlEsGFbZUqr3t/7atTwoHE=">
         <field:input field="sides" id="c_net_sepman_dice_domain_Die_sides" required="true" z="K9Tdtw4eJn0lS4i4AjdxEcYXG1w="/>
         <field:input field="throwResult" id="c_net_sepman_dice_domain_Die_throwResult" z="yu3EvPY6FNFxkMPTjGZzdLoLaK4="/>
+        <field:input field="exploded" id="c_net_sepman_dice_domain_Die_exploded" z="nmmM5J3X6rKS/Wx/nC/IPqLelEk="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_net_sepman_dice_domain_Die" render="${not empty dependencies}" z="8nvXTEXW4wjNVwnDLBQtFMVlLXI="/>
 </div>

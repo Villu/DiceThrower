@@ -5,6 +5,7 @@
     <page:list id="pl_net_sepman_dice_domain_DiceThrow" items="${dicethrows}" z="ylMocoqJP/P2hT/mOtsbZai0x18=">
         <table:table data="${dicethrows}" delete="false" id="l_net_sepman_dice_domain_DiceThrow" path="/dicethrows" update="false" z="NiYwFLF9N593x9CqaTm+SKyt068=">
             <table:column date="true" dateTimePattern="${diceThrow_throwtime_date_format}" id="c_net_sepman_dice_domain_DiceThrow_throwTime" property="throwTime" z="7HMTJtmbGKpXspROPPFMZNv+fvU="/>
+            <table:column id="c_net_sepman_dice_domain_DiceThrow_diceThrows" property="diceThrows"/>
             <table:column id="c_net_sepman_dice_domain_DiceThrow_code" property="code" z="wcGRAcr1Q5N3t7iNpPcFTeivki8="/>
             <table:column id="c_net_sepman_dice_domain_DiceThrow_owner" property="owner" z="wxMqUHHbbPYvqFn7ZF/JqkrlBoU="/>
             <table:column id="c_net_sepman_dice_domain_DiceThrow_comment" property="comment" z="+L/U4Gsz+radNNnaFSz9utHMhYE="/>
