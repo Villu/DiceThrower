@@ -6,7 +6,6 @@ package net.sepman.dice.web;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import net.sepman.dice.domain.DiceThrow;
-import net.sepman.dice.service.DiceService;
 import net.sepman.dice.service.ThrowService;
 import net.sepman.dice.web.ThrowController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ privileged aspect ThrowController_Roo_Controller {
     
     @Autowired
     ThrowService ThrowController.throwService;
-    
-    @Autowired
-    DiceService ThrowController.diceService;
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ThrowController.createForm(Model uiModel) {
@@ -56,12 +52,6 @@ privileged aspect ThrowController_Roo_Controller {
     
     void ThrowController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("diceThrow_throwtime_date_format", "dd-MM-yy hh:mm:ss");
-    }
-    
-    void ThrowController.populateEditForm(Model uiModel, DiceThrow diceThrow) {
-        uiModel.addAttribute("diceThrow", diceThrow);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("dies", diceService.findAllDies());
     }
     
     String ThrowController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -16,7 +16,11 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     public Converter<Die, String> getDieToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<net.sepman.dice.domain.Die, java.lang.String>() {
             public String convert(Die die) {
-                return new StringBuilder().append(die.getThrowResult()).toString();
+            	String s = new StringBuilder().append(die.getThrowResult()).toString();
+            	if(die.getExploded()>0){
+            		s = "<span style=\"color:#"+(99-(die.getExploded()*10))+"0000\">"+s+"<sup>"+die.getExploded()+"</sup></span>";
+            	}
+                return s;
             }
         };
     }

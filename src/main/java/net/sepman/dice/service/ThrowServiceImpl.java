@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sepman.dice.domain.DiceThrow;
@@ -51,42 +52,24 @@ public class ThrowServiceImpl implements ThrowService {
     	Random random = new Random();
     	
     	try {
+    		
+    		Pattern pattern = Pattern.compile("(\\d+)");
+    		
     		//first is the amount of dice
     		char c = command.charAt(0);
     		if(Character.isDigit(c)){
     			log.debug("Is digit:" + c);
-    			amount = Character.getNumericValue(command.charAt(0));
+    			Matcher m = pattern.matcher(command);
+    			m.find();
+    			amount = Integer.parseInt(m.group(1));
     		}
-    		//number of sides indicator followed by number of sides
-    		int sideFound = command.indexOf("b");
-    		if(sideFound>-1){
-    			log.debug("Found sides at:" + sideFound + ", length:" + command.length());
-    			if(sideFound+1<command.length()){
-    				char sideChar = command.charAt(sideFound+1);
-    				log.debug("Found side char:"+sideChar);
-    				if(Character.isDigit(sideChar)){
-        				log.debug("Side is digit");
-        				sides=Character.getNumericValue(sideChar);
-    				}
-    			}
-    		}
-    		log.debug("Sides:" + sides);
-    		//explodes
-    		int explodesFound = command.indexOf("m");
-    		if(explodesFound>-1){
-    			log.debug("Found explodes at:" + explodesFound + ", length:" + command.length());
-    			if(explodesFound+1<command.length()){
-    				char explodesChar = command.charAt(explodesFound+1);
-    				log.debug("Found explodes char:" + explodesChar);
-    				if(Character.isDigit(explodesChar)){
-        				log.debug("Explodes is digit.");
-        				explodes=Character.getNumericValue(explodesChar);
-    				}
-    			}
-    		}
-    		log.debug("Explodes:" + explodes);
+    		
+    		sides = findFirstNumberAfterAChar(command, 'b', sides);
+    		sides = findFirstNumberAfterAChar(command, 'd', sides);
+    		explodes = findFirstNumberAfterAChar(command, 'm', explodes);
     		
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("Code has to start with a digit.");
 		}
     	
@@ -110,5 +93,26 @@ public class ThrowServiceImpl implements ThrowService {
     	return dice;
     }
     
+    private int findFirstNumberAfterAChar(String command, char lookFor, int defaultNumber){
+		Pattern pattern = Pattern.compile("(\\d+)");
+		int number = defaultNumber;
+		//explodes
+		int numberFound = command.indexOf(lookFor);
+		if(numberFound>-1){
+			log.debug("Found number at:" + numberFound + ", length:" + command.length());
+			if(numberFound+1<command.length()){
+				char c = command.charAt(numberFound+1);
+				log.debug("Found char:" + c);
+				if(Character.isDigit(c)){
+    				log.debug("Char is digit.");
+        			Matcher m = pattern.matcher(command.substring(numberFound+1));
+        			m.find();
+        			number = Integer.parseInt(m.group(1));
+				}
+			}
+		}
+		log.debug("Number:" + number);
+		return number;
+    }
     
 }

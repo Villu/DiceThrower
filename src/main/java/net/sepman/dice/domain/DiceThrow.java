@@ -27,10 +27,8 @@ public class DiceThrow {
     @NotNull
     private String code;
 
-    @NotNull
     private String owner;
     
-    @NotNull
     private String command;
 
     private String comment;

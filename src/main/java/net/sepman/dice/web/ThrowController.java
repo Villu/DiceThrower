@@ -12,11 +12,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @RequestMapping("/dicethrows")
 @Controller
 @RooWebScaffold(path = "dicethrows", formBackingObject = DiceThrow.class, delete=false, update=false)
+@SessionAttributes("diceThrow")
 public class ThrowController {
+	
+    public void populateEditForm(Model uiModel, DiceThrow diceThrow) {
+        if(!uiModel.containsAttribute("diceThrow")){
+        	uiModel.addAttribute("diceThrow", diceThrow);
+        }
+        addDateTimeFormatPatterns(uiModel);
+//        uiModel.addAttribute("dies", diceService.findAllDies());
+    }
 	
     @RequestMapping(value="/list/{code}", produces = "text/html")
     public String listByCode(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @PathVariable("code") String code, Model uiModel) {
@@ -39,8 +49,11 @@ public class ThrowController {
             populateEditForm(uiModel, diceThrow);
             return "dicethrows/create";
         }
-        uiModel.asMap().clear();
-        throwService.saveDiceThrow(diceThrow);
+//        uiModel.asMap().clear();
+        uiModel.addAttribute("diceThrow", diceThrow);
+        if(!diceThrow.getCode().isEmpty() && !diceThrow.getCommand().isEmpty()){
+        	throwService.saveDiceThrow(diceThrow);
+        }
         return "redirect:/dicethrows/list/" + encodeUrlPathSegment(diceThrow.getCode().toString(), httpServletRequest);
     }
 }
