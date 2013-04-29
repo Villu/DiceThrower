@@ -30,3 +30,4 @@ hint finder
 hint finder add
 // [failed] finder list --class ~.domain.Die
 logging setup --level INFO
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-04-29 16:47:13

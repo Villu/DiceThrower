@@ -32,20 +32,24 @@ body {
 /* header and footer elements */
 
 #main {
+	margin-top: 50px;
 	overflow:hidden;
 	display:box;
+/* 	position: ; */
 }
 
 #menu {
+/* 	display: inline; */
 	background: #eee;
 	position:relative;
-	float:left;  	
+/* 	float:top;  	 */
 	left:0px;
-	width:220px;
+/* 	width:220px; */
 	margin-right:15px;
 }
 
 #menu ul{
+/* 	display: box; */
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -53,12 +57,14 @@ body {
 
 #menu ul li{
 	padding: 0px;
+/* 	float: right; */
 }
 
 
 #menu a, #menu h2 {
-	display: block;
+/*  	display: inline;  */
 	margin: 0;
+ 	float: left; 
 	padding: 2px 6px;
 	color:#FFFFFF;
 }
@@ -75,7 +81,7 @@ body {
 	color: #666666;
 	background: #efefef;
 	text-decoration: none;
-	padding: 2px 12px;
+	padding: 5px 12px;
 }
 
 #menu a:hover {
