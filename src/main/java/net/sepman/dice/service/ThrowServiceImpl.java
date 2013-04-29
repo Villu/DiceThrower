@@ -62,7 +62,7 @@ public class ThrowServiceImpl implements ThrowService {
     		//first is the amount of dice
     		char c = command.charAt(0);
     		if(Character.isDigit(c)){
-    			log.debug("Is digit:" + c);
+    			log.info("Is digit:" + c);
     			Matcher m = pattern.matcher(command);
     			m.find();
     			amount = Integer.parseInt(m.group(1));
@@ -82,27 +82,27 @@ public class ThrowServiceImpl implements ThrowService {
 			throw new RuntimeException("Code has to start with a digit.");
 		}
     	
-    	log.debug("Throwing:" + amount);
+    	log.info("Throwing:" + amount);
     	int hits = 0;
     	for (int i = 0; i < amount; i++) {
     		Die die = (new Die(sides)).throwDie(random);
-    		if(die.getThrowResult()>=hit){
+    		if(die.getThrowResult()>=hit && hit >0){
     			die.setHit(true);
     			hits++;
-				log.debug("Hit!");
+				log.info("Hit!");
     		}
     		dice.add(die);
-    		log.debug("Threw:" + die.getThrowResult());
+    		log.info("Threw:" + die.getThrowResult());
     		if(explodes>0){
     			int exploded = 0;
     			while(die.getThrowResult()>=explodes){
     				die = (new Die(sides)).throwDie(random);
     				die.setExploded(++exploded);
-    				log.debug("Exploded! New throw:"+die.getThrowResult());
-    	    		if(die.getThrowResult()>=hit){
+    				log.info("Exploded! New throw:"+die.getThrowResult());
+    	    		if(die.getThrowResult()>=hit && hit >0){
     	    			die.setHit(true);
     	    			hits++;
-        				log.debug("Hit!");
+        				log.info("Hit!");
     	    		}
     				dice.add(die);
     			}
@@ -119,22 +119,21 @@ public class ThrowServiceImpl implements ThrowService {
 		//explodes
 		int numberFound = command.indexOf(lookFor);
 		if(numberFound>-1){
-			log.debug("Found number at:" + numberFound + ", length:" + command.length());
+			log.info("Found '"+lookFor+"' at:" + numberFound + ", length:" + command.length());
+			number = defaultNumber;
 			if(numberFound+1<command.length()){
 				char c = command.charAt(numberFound+1);
-				log.debug("Found char:" + c);
+				log.info("Found char:" + c);
 				if(Character.isDigit(c)){
-    				log.debug("Char is digit.");
+    				log.info("Char is digit.");
         			Matcher m = pattern.matcher(command.substring(numberFound+1));
         			m.find();
         			number = Integer.parseInt(m.group(1));
-				}else{
-					number = defaultNumber;
 				}
 			}
 			
 		}
-		log.debug("Number:" + number);
+		log.info("Number:" + number);
 		return number;
     }
     
