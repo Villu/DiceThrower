@@ -20,6 +20,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             	if(die.getExploded()>0){
             		s = "<span style=\"color:#"+(99-(die.getExploded()*10))+"0000\">"+s+"<sup>"+die.getExploded()+"</sup></span>";
             	}
+            	if(die.isHit()){
+            		s = "<u>"+s+"</u>";
+            	}
                 return s;
             }
         };

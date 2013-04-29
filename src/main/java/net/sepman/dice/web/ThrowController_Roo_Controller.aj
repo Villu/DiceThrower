@@ -51,7 +51,7 @@ privileged aspect ThrowController_Roo_Controller {
     }
     
     void ThrowController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("diceThrow_throwtime_date_format", "dd-MM-yy hh:mm:ss");
+        uiModel.addAttribute("diceThrow_throwtime_date_format", "dd-MM-yy HH:mm:ss");
     }
     
     String ThrowController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

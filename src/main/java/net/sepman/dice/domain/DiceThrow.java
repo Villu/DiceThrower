@@ -26,7 +26,7 @@ public class DiceThrow {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "dd-MM-yy hh:mm:ss")
+    @DateTimeFormat(pattern = "dd-MM-yy HH:mm:ss")
     private Date throwTime;
 
     @NotNull
@@ -37,6 +37,8 @@ public class DiceThrow {
     private String command;
 
     private String comment;
+    
+    private int hits; 
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Die> diceThrows = new ArrayList<Die>();

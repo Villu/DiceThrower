@@ -25,6 +25,8 @@ public class Die {
     
     private int exploded = 0;
     
+    private boolean hit = false; 
+    
     public Die throwDie(Random random){
     	int min = 1;
     	int max = sides;

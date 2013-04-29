@@ -2,6 +2,7 @@ package net.sepman.dice.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -32,22 +33,25 @@ public class ThrowServiceImpl implements ThrowService {
     }
 	
     public void saveDiceThrow(DiceThrow diceThrow) {
-    	
-    	List<Die> dice = calculate(diceThrow.getCommand());
+    	ThrowHolder throwHolder = calculate(diceThrow.getCommand());
+    	List<Die> dice = throwHolder.dice;
     	diceThrow.setDiceThrows(dice);
+    	diceThrow.setHits(throwHolder.hits);
+    	diceThrow.setHits(throwHolder.hits);
     	diceThrow.setThrowTime(new Date());
         throwRepository.save(diceThrow);
     }
     
-    private List<Die> calculate(String command){
+    private ThrowHolder calculate(String command){
     	if(command == null || "".equals(command)){
     		return null;
     	}
     	List<Die> dice = new ArrayList<Die>();
     	
     	int amount=1;
-    	int sides=6;
+    	int sides=-1;
     	int explodes=0;
+    	int hit=0;
     	
     	Random random = new Random();
     	
@@ -64,9 +68,14 @@ public class ThrowServiceImpl implements ThrowService {
     			amount = Integer.parseInt(m.group(1));
     		}
     		
-    		sides = findFirstNumberAfterAChar(command, 'b', sides);
-    		sides = findFirstNumberAfterAChar(command, 'd', sides);
-    		explodes = findFirstNumberAfterAChar(command, 'm', explodes);
+    		sides = findFirstNumberAfterAChar(command, 'b', 6);
+    		if(sides!=-1){
+    			//found b
+    			explodes=6;
+    		}else{
+    			sides = findFirstNumberAfterAChar(command, 'd', 6);
+    		}
+    		hit = findFirstNumberAfterAChar(command, 'm', hit);
     		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,8 +83,14 @@ public class ThrowServiceImpl implements ThrowService {
 		}
     	
     	log.debug("Throwing:" + amount);
+    	int hits = 0;
     	for (int i = 0; i < amount; i++) {
     		Die die = (new Die(sides)).throwDie(random);
+    		if(die.getThrowResult()>=hit){
+    			die.setHit(true);
+    			hits++;
+				log.debug("Hit!");
+    		}
     		dice.add(die);
     		log.debug("Threw:" + die.getThrowResult());
     		if(explodes>0){
@@ -84,18 +99,23 @@ public class ThrowServiceImpl implements ThrowService {
     				die = (new Die(sides)).throwDie(random);
     				die.setExploded(++exploded);
     				log.debug("Exploded! New throw:"+die.getThrowResult());
+    	    		if(die.getThrowResult()>=hit){
+    	    			die.setHit(true);
+    	    			hits++;
+        				log.debug("Hit!");
+    	    		}
     				dice.add(die);
     			}
     		}
 			
 		}
     	
-    	return dice;
+    	return new ThrowHolder(hits, dice);
     }
     
     private int findFirstNumberAfterAChar(String command, char lookFor, int defaultNumber){
 		Pattern pattern = Pattern.compile("(\\d+)");
-		int number = defaultNumber;
+		int number = -1;
 		//explodes
 		int numberFound = command.indexOf(lookFor);
 		if(numberFound>-1){
@@ -108,11 +128,24 @@ public class ThrowServiceImpl implements ThrowService {
         			Matcher m = pattern.matcher(command.substring(numberFound+1));
         			m.find();
         			number = Integer.parseInt(m.group(1));
+				}else{
+					number = defaultNumber;
 				}
 			}
+			
 		}
 		log.debug("Number:" + number);
 		return number;
+    }
+    
+    class ThrowHolder{
+    	public int hits;
+    	public ThrowHolder(int hits, List<Die> dice) {
+			super();
+			this.hits = hits;
+			this.dice = dice;
+		}
+		public List<Die> dice;
     }
     
 }

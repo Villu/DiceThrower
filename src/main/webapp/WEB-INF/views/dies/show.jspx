@@ -6,5 +6,6 @@
         <field:display field="sides" id="s_net_sepman_dice_domain_Die_sides" object="${die}" z="8Zq/G0DiX+0U3jFk3sY7ld4//e4="/>
         <field:display field="throwResult" id="s_net_sepman_dice_domain_Die_throwResult" object="${die}" z="rpzazDuEVYct9o/MccHUi8Fu8Dw="/>
         <field:display field="exploded" id="s_net_sepman_dice_domain_Die_exploded" object="${die}" z="oeuzx6bRxgXjVGOjqhz2IJ/e32Q="/>
+        <field:display field="hit" id="s_net_sepman_dice_domain_Die_hit" object="${die}" z="qEx2N35bI6eFpvvFBQj7ts2VaKQ="/>
     </page:show>
 </div>

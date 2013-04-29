@@ -10,6 +10,7 @@
             <table:column id="c_net_sepman_dice_domain_DiceThrow_owner" property="owner" z="wxMqUHHbbPYvqFn7ZF/JqkrlBoU="/>
             <table:column id="c_net_sepman_dice_domain_DiceThrow_comment" property="comment" z="+L/U4Gsz+radNNnaFSz9utHMhYE="/>
             <table:column id="c_net_sepman_dice_domain_DiceThrow_command" property="command" z="U0LIjBBOCI7VpUFudcJPFRDwxMo="/>
+            <table:column id="c_net_sepman_dice_domain_DiceThrow_hits" property="hits" z="XseOtFw/Bu+zVpUB8esFKM/zO1c="/>
         </table:tableForDice>
     </page:list>
 </div>

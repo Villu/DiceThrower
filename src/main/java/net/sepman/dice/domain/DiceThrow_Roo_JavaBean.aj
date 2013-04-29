@@ -50,6 +50,14 @@ privileged aspect DiceThrow_Roo_JavaBean {
         this.comment = comment;
     }
     
+    public int DiceThrow.getHits() {
+        return this.hits;
+    }
+    
+    public void DiceThrow.setHits(int hits) {
+        this.hits = hits;
+    }
+    
     public List<Die> DiceThrow.getDiceThrows() {
         return this.diceThrows;
     }

@@ -31,4 +31,12 @@ privileged aspect Die_Roo_JavaBean {
         this.exploded = exploded;
     }
     
+    public boolean Die.isHit() {
+        return this.hit;
+    }
+    
+    public void Die.setHit(boolean hit) {
+        this.hit = hit;
+    }
+    
 }

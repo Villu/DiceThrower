@@ -21,9 +21,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class ThrowController {
 	
     public void populateEditForm(Model uiModel, DiceThrow diceThrow) {
-        if(!uiModel.containsAttribute("diceThrow")){
-        	uiModel.addAttribute("diceThrow", diceThrow);
+        if(uiModel.containsAttribute("diceThrow")){
+        	//copy from old, to avoid overwriting old throw
+        	DiceThrow oldThrow = (DiceThrow)uiModel.asMap().get("diceThrow");
+        	diceThrow.setCode(oldThrow.getCode());
+        	diceThrow.setCommand(oldThrow.getCommand());
+        	diceThrow.setComment(oldThrow.getComment());
+        	diceThrow.setOwner(oldThrow.getOwner());
         }
+    	uiModel.addAttribute("diceThrow", diceThrow);
         addDateTimeFormatPatterns(uiModel);
 //        uiModel.addAttribute("dies", diceService.findAllDies());
     }
