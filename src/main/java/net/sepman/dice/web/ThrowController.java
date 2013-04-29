@@ -28,6 +28,7 @@ public class ThrowController {
         	diceThrow.setCommand(oldThrow.getCommand());
         	diceThrow.setComment(oldThrow.getComment());
         	diceThrow.setOwner(oldThrow.getOwner());
+        	diceThrow.setRandomOrg(oldThrow.isRandomOrg());
         }
     	uiModel.addAttribute("diceThrow", diceThrow);
         addDateTimeFormatPatterns(uiModel);

@@ -23,6 +23,7 @@ public class DiceThrow {
     public DiceThrow(String code) {
 		super();
 		this.code = code;
+		this.randomOrg = true;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -40,7 +41,7 @@ public class DiceThrow {
     
     private int hits; 
     
-    private boolean randomOrg;
+    private boolean randomOrg = true;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Die> diceThrows = new ArrayList<Die>();
