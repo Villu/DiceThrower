@@ -21,11 +21,11 @@ public class ThrowServiceImpl implements ThrowService {
 	static Logger log = LoggerFactory.getLogger(ThrowServiceImpl.class.getName());
 	
 	public List<DiceThrow> findByCode(String code){
-		return throwRepository.findByCode(code);
+		return throwRepository.findByCodeOrderByThrowTimeDesc(code);
 	}
 	
     public List<DiceThrow> findDiceThrowEntriesByCode(int firstResult, int maxResults, String code) {
-        return throwRepository.findByCode(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults), code);
+        return throwRepository.findByCodeOrderByThrowTimeDesc(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults), code);
     }
     
     public long countAllDiceThrowsByCode(String code) {
