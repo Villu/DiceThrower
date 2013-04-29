@@ -3,6 +3,9 @@ package net.sepman.dice.domain;
 import java.util.Random;
 
 import javax.validation.constraints.NotNull;
+
+import net.sepman.dice.utils.RandomOrg;
+
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -27,10 +30,14 @@ public class Die {
     
     private boolean hit = false; 
     
-    public Die throwDie(Random random){
+    public Die throwDie(Random random, boolean org){
     	int min = 1;
     	int max = sides;
-    	throwResult = random.nextInt(max - min + 1) + min;
+    	if(org){
+    		throwResult = RandomOrg.getRandom(sides);
+    	}else{
+    		throwResult = random.nextInt(max - min + 1) + min;
+    	}
     	return this;
     }
 }

@@ -10,5 +10,6 @@
         <field:display field="diceThrows" id="s_net_sepman_dice_domain_DiceThrow_diceThrows" object="${dicethrow}"/>
         <field:display field="command" id="s_net_sepman_dice_domain_DiceThrow_command" object="${dicethrow}" z="tTfCPIA8sVTSGvBOoC9REdW23UU="/>
         <field:display field="hits" id="s_net_sepman_dice_domain_DiceThrow_hits" object="${dicethrow}" z="qyMGcb9aSsNA4jO4YHp6jgcgEp0="/>
+        <field:display field="randomOrg" id="s_net_sepman_dice_domain_DiceThrow_randomOrg" object="${dicethrow}" z="VHGOHnODhdMYmZ0Q4voBsi5O4Ww="/>
     </page:show>
 </div>

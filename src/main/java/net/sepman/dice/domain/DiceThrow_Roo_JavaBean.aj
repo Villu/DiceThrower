@@ -58,6 +58,14 @@ privileged aspect DiceThrow_Roo_JavaBean {
         this.hits = hits;
     }
     
+    public boolean DiceThrow.isRandomOrg() {
+        return this.randomOrg;
+    }
+    
+    public void DiceThrow.setRandomOrg(boolean randomOrg) {
+        this.randomOrg = randomOrg;
+    }
+    
     public List<Die> DiceThrow.getDiceThrows() {
         return this.diceThrows;
     }

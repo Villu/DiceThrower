@@ -39,6 +39,8 @@ public class DiceThrow {
     private String comment;
     
     private int hits; 
+    
+    private boolean randomOrg;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Die> diceThrows = new ArrayList<Die>();

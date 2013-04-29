@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import net.sepman.dice.domain.DiceThrow;
 import net.sepman.dice.domain.Die;
 import net.sepman.dice.repository.ThrowRepository;
+import net.sepman.dice.utils.RandomOrg;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class ThrowServiceImpl implements ThrowService {
     }
 	
     public void saveDiceThrow(DiceThrow diceThrow) {
-    	ThrowHolder throwHolder = calculate(diceThrow.getCommand());
+    	ThrowHolder throwHolder = calculate(diceThrow.getCommand(), diceThrow.isRandomOrg());
     	List<Die> dice = throwHolder.dice;
     	diceThrow.setDiceThrows(dice);
     	diceThrow.setHits(throwHolder.hits);
@@ -42,7 +43,7 @@ public class ThrowServiceImpl implements ThrowService {
         throwRepository.save(diceThrow);
     }
     
-    private ThrowHolder calculate(String command){
+    private ThrowHolder calculate(String command, boolean org){
     	if(command == null || "".equals(command)){
     		return null;
     	}
@@ -83,9 +84,13 @@ public class ThrowServiceImpl implements ThrowService {
 		}
     	
     	log.info("Throwing:" + amount);
+    	List randomOrgNumbers = null;
+    	if(org){
+    		randomOrgNumbers = RandomOrg.getRandom(sides, amount*3);
+    	}
     	int hits = 0;
     	for (int i = 0; i < amount; i++) {
-    		Die die = (new Die(sides)).throwDie(random);
+    		Die die = newRolledDie(org, sides, random, randomOrgNumbers);
     		if(die.getThrowResult()>=hit && hit >0){
     			die.setHit(true);
     			hits++;
@@ -96,7 +101,7 @@ public class ThrowServiceImpl implements ThrowService {
     		if(explodes>0){
     			int exploded = 0;
     			while(die.getThrowResult()>=explodes){
-    				die = (new Die(sides)).throwDie(random);
+    				die = newRolledDie(org, sides, random, randomOrgNumbers);
     				die.setExploded(++exploded);
     				log.info("Exploded! New throw:"+die.getThrowResult());
     	    		if(die.getThrowResult()>=hit && hit >0){
@@ -111,6 +116,21 @@ public class ThrowServiceImpl implements ThrowService {
 		}
     	
     	return new ThrowHolder(hits, dice);
+    }
+    
+    private Die newRolledDie(boolean org, int sides, Random random, List randomOrgNumbers){
+		Die die = new Die(sides);
+		if(org){
+			try{
+				die.setThrowResult(Integer.parseInt((String)randomOrgNumbers.remove(0)));
+			}catch(Exception e){
+				e.printStackTrace();
+				throw new RuntimeException("Error parsing random, list:"+randomOrgNumbers);
+			}
+		}else{
+			die = die.throwDie(random, org);
+		}
+    	return die;
     }
     
     private int findFirstNumberAfterAChar(String command, char lookFor, int defaultNumber){
