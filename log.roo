@@ -29,3 +29,4 @@ hint finder
 // [failed] finder list
 hint finder add
 // [failed] finder list --class ~.domain.Die
+logging setup --level INFO

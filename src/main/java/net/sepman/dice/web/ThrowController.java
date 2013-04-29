@@ -39,7 +39,7 @@ public class ThrowController {
         } else {
             uiModel.addAttribute("dicethrows", throwService.findByCode(code));
         }
-        addDateTimeFormatPatterns(uiModel);
+        populateEditForm(uiModel,new DiceThrow(code));
         return "dicethrows/list";
     }
     

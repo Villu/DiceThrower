@@ -7,6 +7,8 @@
         <field:input field="comment" id="c_net_sepman_dice_domain_DiceThrow_comment" z="L77qcLl99LzSZYis2a7k7uTQPlM="/>
         <field:input field="code" id="c_net_sepman_dice_domain_DiceThrow_code" required="true" z="zYiVnPR2TCOb0/95o8Dpbz7lkXg="/>
         <field:input field="owner" id="c_net_sepman_dice_domain_DiceThrow_owner" required="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${diceThrow_throwtime_date_format}" field="throwTime" id="c_net_sepman_dice_domain_DiceThrow_throwTime" z="brbLl8rdivqkjEn9OV+/evgxCNM="/>
+        <field:simple field="diceThrows" id="c_net_sepman_dice_domain_DiceThrow_diceThrows" messageCode="entity_reference_not_managed" messageCodeAttribute="Die" z="A2pkq1JVtsQp2f0ubCXSrEbs9hM="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_net_sepman_dice_domain_DiceThrow" render="${not empty dependencies}" z="Z9WVEaYx5VF3l540C577gKu+lsM="/>
 </div>

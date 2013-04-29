@@ -20,7 +20,12 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity
 public class DiceThrow {
 
-    @Temporal(TemporalType.TIMESTAMP)
+    public DiceThrow(String code) {
+		super();
+		this.code = code;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yy hh:mm:ss")
     private Date throwTime;
 

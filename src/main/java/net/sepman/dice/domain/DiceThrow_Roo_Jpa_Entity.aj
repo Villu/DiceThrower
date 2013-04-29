@@ -24,6 +24,10 @@ privileged aspect DiceThrow_Roo_Jpa_Entity {
     @Column(name = "version")
     private Integer DiceThrow.version;
     
+    public DiceThrow.new() {
+        super();
+    }
+
     public Long DiceThrow.getId() {
         return this.id;
     }
